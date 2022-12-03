@@ -6,7 +6,7 @@
  */
 
 #include "variables.h"
-#include "usart.h"
+
 
 void led_kontrol (void)
 {
@@ -79,70 +79,9 @@ void uart_veri_oku(void)
 			else
 				uart_baglanti_hatasi = 1;
 		}
-
-		switch (komut){
-		case 0x01:
-		{
-			uart_echo = start;
-			break;
-		}
-		case 0x02:
-		{
-			uart_echo = stop;
-			break;
-		}
-		case 0x03:
-		{
-			ledOn_sure = veri;
-			break;
-		}
-		case 0x04:
-		{
-			ledOff_sure = veri;
-			break;
-		}
-		default:
-		{
-			;
-		}
-		}
-
-		if (uart_echo == start) // stop komutu gelmedigi surece her uart verisi alindiktan sonra veriyi echo yapacak
-		{
-			uart_veri_gonder();
-		}
 	}
 }
 
-/*
- * @brief 	Uart veri tarnsferi için buffer yapısını belirler ve gelen veriyi echo yaptırır
- * @param	ilk iki veri anahtar setidir 0x3641
- * 			ikinci veri komut verisidir.
- * 			komut 0x01 ise uart veri gonderimini basladığını bildirir
- *			komut 0x02 ise uart veri gonderimini durdugunu bildirir
- *			komut 0x03 ise LedOn suresinin gönderildiğini belirtir
- *			komut 0x04 ise LedOff suresinin gönderildiğini belirtir
- *			3. ve 4. veriler LedOn ve ledOff suresinin degerini gönderir
- *
- *			alıcı tarafta veri kaybı olmasın diye iki kez gönderiliyor.
- */
-
-
-void uart_veri_gonder(void)
-{
-	TX_veri[0]=0x36; // veri seti anahtar kodu
-	TX_veri[1]=0x41; // veri seti anahtar kodu
-	TX_veri[2]=komut;
-	TX_veri[3]=veri_hb; // gonderilen verinin high biti
-	TX_veri[4]=veri_lb; // gonderilen verinin low biti
-
-	for (uint8_t i=0;i<5;i++) // Alici taraf veriyi kacirirsa diye tekrarli gonderiyor
-	{
-		TX_veri[i+5]=TX_veri[i];
-	}
-
-	HAL_UART_Transmit(&huart3, (uint8_t *)&TX_veri, sizeof(TX_veri), 250);
-}
 
 
 

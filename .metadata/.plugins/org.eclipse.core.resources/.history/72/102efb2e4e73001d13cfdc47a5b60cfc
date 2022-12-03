@@ -103,7 +103,6 @@ int main(void)
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 
-	//baslangic deger atamalari
 	uart_echo = stop;
 	ledOff_sure=3000;
 	ledOn_sure=1000;

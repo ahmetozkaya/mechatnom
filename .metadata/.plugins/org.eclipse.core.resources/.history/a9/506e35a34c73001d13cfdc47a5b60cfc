@@ -6,7 +6,7 @@
  */
 
 #include "variables.h"
-#include "usart.h"
+
 
 void led_kontrol (void)
 {
