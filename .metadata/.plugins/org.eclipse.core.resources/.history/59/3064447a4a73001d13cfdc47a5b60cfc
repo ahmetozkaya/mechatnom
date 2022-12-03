@@ -42,19 +42,6 @@ void led_kontrol (void)
 
 }
 
-/*
- * @brief Uart iletişimi için buffer yapısı
- * @param
- *		__[16bit]__[__8bit__]__[__8bit__]___[8bit]____[8bit]_
- *		_Anahtar___Komut_______veri_hb______veri_lb___check__
- *		anahtar 0x3641 olarak belirlendi
- *		komut 0x01 ise uart veri gonderimini baslatir
- *		komut 0x02 ise uart veri gonderimini durdurur
- *		komut 0x03 ise LedOn suresinin degerini ayarlar
- *		komut 0x04 ise LedOff suresinin degerini ayarlar
- *		sure degerleri veri_hb ve veri_lb nin 16 bit veriye donusturulmesi ile elde e#dilir.
- */
-
 void uart_veri_oku(void)
 {
 	IT_uart_3_kontrol++;

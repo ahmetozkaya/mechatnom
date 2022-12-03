@@ -19,19 +19,9 @@
 uint8_t led_durum;
 
 
-uint8_t RX_veri[10];
-uint8_t TX_veri[10];
-
-uint8_t komut;
-uint8_t	veri_hb; // verinin high biti
-uint8_t	veri_lb; // verinin low biti
-uint16_t veri;
 uint16_t ledOn_sure;
 uint16_t ledOff_sure;
 uint8_t uart_echo;
 uint16_t zaman;
-uint8_t IT_uart_3_kontrol; // veri setinin tamaminin alindiginin kontrolu icin
-uint8_t uart_baglanti_hatasi; // uarttan alinan veri setinde anahtar uymuyorsa yanlis veri alındi diye uyari olusturabilmek icin
-
 
 #endif /* INC_VARIABLES_H_ */

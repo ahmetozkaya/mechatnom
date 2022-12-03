@@ -9,6 +9,5 @@
 #define INC_FUNCTIONS_H_
 
 void led_kontrol (void);
-void uart_veri_oku(void);
 
 #endif /* INC_FUNCTIONS_H_ */

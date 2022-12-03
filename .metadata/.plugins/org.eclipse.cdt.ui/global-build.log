@@ -1,6 +1,6 @@
-22:37:17 **** Incremental Build of configuration Debug for project mechatnom ****
+23:38:43 **** Incremental Build of configuration Debug for project mechatnom ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../USB_HOST/App -I../USB_HOST/Target -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Host_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/functions.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../USB_HOST/App -I../USB_HOST/Target -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Host_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/functions.d" -MT"Core/Src/functions.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/functions.o"
 arm-none-eabi-gcc -o "mechatnom.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Ahmet\Desktop\Mechatnom_proje\mechatnom\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mechatnom.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: mechatnom.elf
  
@@ -8,7 +8,7 @@ arm-none-eabi-size   mechatnom.elf
 arm-none-eabi-objdump -h -S  mechatnom.elf  > "mechatnom.list"
 arm-none-eabi-objcopy  -O binary  mechatnom.elf  "mechatnom.bin"
    text	   data	    bss	    dec	    hex	filename
-  33928	    152	   3512	  37592	   92d8	mechatnom.elf
+  34152	    152	   3536	  37840	   93d0	mechatnom.elf
 Finished building: default.size.stdout
  
 Finished building: mechatnom.bin
