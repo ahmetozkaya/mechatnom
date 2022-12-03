@@ -1,0 +1,27 @@
+/*
+ * variables.h
+ *
+ *  Created on: Dec 3, 2022
+ *      Author: Ahmet
+ */
+#include "stdint.h"
+
+#ifndef INC_VARIABLES_H_
+#define INC_VARIABLES_H_
+
+
+#define start 	0x01
+#define stop 	0x02
+#define ledOn_ayar 	0x03
+#define ledOff_ayar	0x04
+
+#define led_On_Off 		HAL_GPIO_WritePin( LD6_GPIO_Port,LD6_Pin,led_durum)
+uint8_t led_durum;
+
+
+uint16_t ledOn_sure;
+uint16_t ledOff_sure;
+uint8_t uart_echo;
+uint16_t zaman;
+
+#endif /* INC_VARIABLES_H_ */

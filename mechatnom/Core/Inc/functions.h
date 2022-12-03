@@ -1,0 +1,13 @@
+/*
+ * functions.h
+ *
+ *  Created on: Dec 3, 2022
+ *      Author: Ahmet
+ */
+
+#ifndef INC_FUNCTIONS_H_
+#define INC_FUNCTIONS_H_
+
+void led_kontrol (void);
+
+#endif /* INC_FUNCTIONS_H_ */
