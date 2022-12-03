@@ -354,10 +354,10 @@ Disassembly of section .text:
  80004be:	bf00      	nop
 
 080004c0 <led_kontrol>:
-
-#include "variables.h"
 #include "usart.h"
 #include "functions.h"
+
+
 void led_kontrol (void)
 {
  80004c0:	b580      	push	{r7, lr}
@@ -485,9 +485,9 @@ void led_kontrol (void)
 
 08000594 <uart_veri_oku>:
  *		komut 0x04 ise LedOff suresinin degerini ayarlar
- *		sure degerleri veri_hb ve veri_lb nin 16 bit veriye donusturulmesi ile elde e#dilir.
+ *		sure degerleri veri_hb ve veri_lb nin 16 bit veriye donusturulmesi ile elde edilir.
+ *		En son veri check verisi olarak oluşturulup eklenebilir. Bu durumda toplam buffer RX_veri[12] olarak güncellenmelidir.
  */
-
 void uart_veri_oku(void)
 {
  8000594:	b580      	push	{r7, lr}
@@ -500,7 +500,6 @@ void uart_veri_oku(void)
  80005a0:	b2da      	uxtb	r2, r3
  80005a2:	4b2a      	ldr	r3, [pc, #168]	; (800064c <uart_veri_oku+0xb8>)
  80005a4:	701a      	strb	r2, [r3, #0]
-
 	if(IT_uart_3_kontrol == sizeof(RX_veri))
  80005a6:	4b29      	ldr	r3, [pc, #164]	; (800064c <uart_veri_oku+0xb8>)
  80005a8:	781b      	ldrb	r3, [r3, #0]
@@ -642,124 +641,124 @@ void uart_veri_ayristirma(void)
  8000688:	080006a5 	.word	0x080006a5
  800068c:	080006af 	.word	0x080006af
  8000690:	080006b9 	.word	0x080006b9
-			case 0x01:
-			{
-				uart_echo = start;
+	case 0x01:
+	{
+		uart_echo = start;
  8000694:	4b25      	ldr	r3, [pc, #148]	; (800072c <uart_veri_ayristirma+0xc0>)
  8000696:	2201      	movs	r2, #1
  8000698:	701a      	strb	r2, [r3, #0]
-				break;
+		break;
  800069a:	e042      	b.n	8000722 <uart_veri_ayristirma+0xb6>
-			}
-			case 0x02:
-			{
-				uart_echo = stop;
+	}
+	case 0x02:
+	{
+		uart_echo = stop;
  800069c:	4b23      	ldr	r3, [pc, #140]	; (800072c <uart_veri_ayristirma+0xc0>)
  800069e:	2202      	movs	r2, #2
  80006a0:	701a      	strb	r2, [r3, #0]
-				break;
+		break;
  80006a2:	e03e      	b.n	8000722 <uart_veri_ayristirma+0xb6>
-			}
-			case 0x03:
-			{
-				ledOn_sure = veri;
+	}
+	case 0x03:
+	{
+		ledOn_sure = veri;
  80006a4:	4b22      	ldr	r3, [pc, #136]	; (8000730 <uart_veri_ayristirma+0xc4>)
  80006a6:	881a      	ldrh	r2, [r3, #0]
  80006a8:	4b22      	ldr	r3, [pc, #136]	; (8000734 <uart_veri_ayristirma+0xc8>)
  80006aa:	801a      	strh	r2, [r3, #0]
-				break;
+		break;
  80006ac:	e039      	b.n	8000722 <uart_veri_ayristirma+0xb6>
-			}
-			case 0x04:
-			{
-				ledOff_sure = veri;
+	}
+	case 0x04:
+	{
+		ledOff_sure = veri;
  80006ae:	4b20      	ldr	r3, [pc, #128]	; (8000730 <uart_veri_ayristirma+0xc4>)
  80006b0:	881a      	ldrh	r2, [r3, #0]
  80006b2:	4b21      	ldr	r3, [pc, #132]	; (8000738 <uart_veri_ayristirma+0xcc>)
  80006b4:	801a      	strh	r2, [r3, #0]
-				break;
+		break;
  80006b6:	e034      	b.n	8000722 <uart_veri_ayristirma+0xb6>
-			}
-			case 0x05://baudrate_hizi;
-			{
-				if(veri_lb==0)
+	}
+	case 0x05://baudrate_hizi;
+	{
+		if(veri_lb==0)
  80006b8:	4b20      	ldr	r3, [pc, #128]	; (800073c <uart_veri_ayristirma+0xd0>)
  80006ba:	781b      	ldrb	r3, [r3, #0]
  80006bc:	2b00      	cmp	r3, #0
  80006be:	d104      	bne.n	80006ca <uart_veri_ayristirma+0x5e>
-				{
-					huart3.Init.BaudRate = 115200;
+		{
+			huart3.Init.BaudRate = 115200;
  80006c0:	4b1f      	ldr	r3, [pc, #124]	; (8000740 <uart_veri_ayristirma+0xd4>)
  80006c2:	f44f 32e1 	mov.w	r2, #115200	; 0x1c200
  80006c6:	605a      	str	r2, [r3, #4]
  80006c8:	e027      	b.n	800071a <uart_veri_ayristirma+0xae>
-				}
-				else if (veri_lb==1)
+		}
+		else if (veri_lb==1)
  80006ca:	4b1c      	ldr	r3, [pc, #112]	; (800073c <uart_veri_ayristirma+0xd0>)
  80006cc:	781b      	ldrb	r3, [r3, #0]
  80006ce:	2b01      	cmp	r3, #1
  80006d0:	d104      	bne.n	80006dc <uart_veri_ayristirma+0x70>
-				{
-					huart3.Init.BaudRate = 230400;
+		{
+			huart3.Init.BaudRate = 230400;
  80006d2:	4b1b      	ldr	r3, [pc, #108]	; (8000740 <uart_veri_ayristirma+0xd4>)
  80006d4:	f44f 3261 	mov.w	r2, #230400	; 0x38400
  80006d8:	605a      	str	r2, [r3, #4]
  80006da:	e01e      	b.n	800071a <uart_veri_ayristirma+0xae>
-				}
-				else if (veri_lb==2)
+		}
+		else if (veri_lb==2)
  80006dc:	4b17      	ldr	r3, [pc, #92]	; (800073c <uart_veri_ayristirma+0xd0>)
  80006de:	781b      	ldrb	r3, [r3, #0]
  80006e0:	2b02      	cmp	r3, #2
  80006e2:	d104      	bne.n	80006ee <uart_veri_ayristirma+0x82>
-				{
-					huart3.Init.BaudRate = 57600;
+		{
+			huart3.Init.BaudRate = 57600;
  80006e4:	4b16      	ldr	r3, [pc, #88]	; (8000740 <uart_veri_ayristirma+0xd4>)
  80006e6:	f44f 4261 	mov.w	r2, #57600	; 0xe100
  80006ea:	605a      	str	r2, [r3, #4]
  80006ec:	e015      	b.n	800071a <uart_veri_ayristirma+0xae>
-				}
-				else if (veri_lb==3)
+		}
+		else if (veri_lb==3)
  80006ee:	4b13      	ldr	r3, [pc, #76]	; (800073c <uart_veri_ayristirma+0xd0>)
  80006f0:	781b      	ldrb	r3, [r3, #0]
  80006f2:	2b03      	cmp	r3, #3
  80006f4:	d104      	bne.n	8000700 <uart_veri_ayristirma+0x94>
-				{
-					huart3.Init.BaudRate = 38400;
+		{
+			huart3.Init.BaudRate = 38400;
  80006f6:	4b12      	ldr	r3, [pc, #72]	; (8000740 <uart_veri_ayristirma+0xd4>)
  80006f8:	f44f 4216 	mov.w	r2, #38400	; 0x9600
  80006fc:	605a      	str	r2, [r3, #4]
  80006fe:	e00c      	b.n	800071a <uart_veri_ayristirma+0xae>
-				}
-				else if (veri_lb==4)
+		}
+		else if (veri_lb==4)
  8000700:	4b0e      	ldr	r3, [pc, #56]	; (800073c <uart_veri_ayristirma+0xd0>)
  8000702:	781b      	ldrb	r3, [r3, #0]
  8000704:	2b04      	cmp	r3, #4
  8000706:	d104      	bne.n	8000712 <uart_veri_ayristirma+0xa6>
-				{
-					huart3.Init.BaudRate = 9600;
+		{
+			huart3.Init.BaudRate = 9600;
  8000708:	4b0d      	ldr	r3, [pc, #52]	; (8000740 <uart_veri_ayristirma+0xd4>)
  800070a:	f44f 5216 	mov.w	r2, #9600	; 0x2580
  800070e:	605a      	str	r2, [r3, #4]
  8000710:	e003      	b.n	800071a <uart_veri_ayristirma+0xae>
-				}
-				else // default değeri olarak 115200 belirlendi
-				{
-					huart3.Init.BaudRate = 115200;
+		}
+		else // default değeri olarak 115200 belirlendi
+		{
+			huart3.Init.BaudRate = 115200;
  8000712:	4b0b      	ldr	r3, [pc, #44]	; (8000740 <uart_veri_ayristirma+0xd4>)
  8000714:	f44f 32e1 	mov.w	r2, #115200	; 0x1c200
  8000718:	605a      	str	r2, [r3, #4]
-				}
+		}
 
-				HAL_UART_Init(&huart3);
+		HAL_UART_Init(&huart3);
  800071a:	4809      	ldr	r0, [pc, #36]	; (8000740 <uart_veri_ayristirma+0xd4>)
  800071c:	f003 fe9e 	bl	800445c <HAL_UART_Init>
-				break;
+		break;
  8000720:	bf00      	nop
-			default:
-			{
-				;
-			}
-			}
+	default:
+	{
+		;
+	}
+	}
 }
  8000722:	bf00      	nop
  8000724:	bd80      	pop	{r7, pc}
@@ -773,10 +772,10 @@ void uart_veri_ayristirma(void)
  8000740:	2000012c 	.word	0x2000012c
 
 08000744 <uart_veri_gonder>:
+ *			3. ve 4. veriler LedOn ve ledOff suresinin degerini gönderir
+ *
  *			alıcı tarafta veri kaybı olmasın diye iki kez gönderiliyor.
  */
-
-
 void uart_veri_gonder(void)
 {
  8000744:	b580      	push	{r7, lr}
@@ -1309,7 +1308,7 @@ int main(void)
  8000a80:	f007 fb90 	bl	80081a4 <MX_USB_HOST_Process>
 
 		/* USER CODE BEGIN 3 */
-		led_kontrol();
+		led_kontrol(); // TIM3_IRQHandler(void) fonksiyonun içinde de çalıştırılabilir. başka fonksiyon olmadığı için main içinde çalıştırıldı
  8000a84:	f7ff fd1c 	bl	80004c0 <led_kontrol>
 		MX_USB_HOST_Process();
  8000a88:	e7fa      	b.n	8000a80 <main+0x48>

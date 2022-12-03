@@ -1,4 +1,4 @@
-functions.c:11:6:led_kontrol	8	static
-functions.c:58:6:uart_veri_oku	16	static
-functions.c:104:6:uart_veri_ayristirma	8	static
-functions.c:179:6:uart_veri_gonder	16	static
+functions.c:13:6:led_kontrol	8	static
+functions.c:60:6:uart_veri_oku	16	static
+functions.c:105:6:uart_veri_ayristirma	8	static
+functions.c:178:6:uart_veri_gonder	16	static

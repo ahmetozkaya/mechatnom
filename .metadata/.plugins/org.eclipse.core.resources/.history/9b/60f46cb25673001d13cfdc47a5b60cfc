@@ -8,8 +8,6 @@
 #include "variables.h"
 #include "usart.h"
 #include "functions.h"
-
-
 void led_kontrol (void)
 {
 	if (uart_echo==stop)
@@ -57,9 +55,11 @@ void led_kontrol (void)
  *		sure degerleri veri_hb ve veri_lb nin 16 bit veriye donusturulmesi ile elde edilir.
  *		En son veri check verisi olarak oluşturulup eklenebilir. Bu durumda toplam buffer RX_veri[12] olarak güncellenmelidir.
  */
+
 void uart_veri_oku(void)
 {
 	IT_uart_3_kontrol++;
+
 	if(IT_uart_3_kontrol == sizeof(RX_veri))
 	{
 		IT_uart_3_kontrol = 0;
@@ -105,62 +105,62 @@ void uart_veri_oku(void)
 void uart_veri_ayristirma(void)
 {
 	switch (komut){
-	case 0x01:
-	{
-		uart_echo = start;
-		break;
-	}
-	case 0x02:
-	{
-		uart_echo = stop;
-		break;
-	}
-	case 0x03:
-	{
-		ledOn_sure = veri;
-		break;
-	}
-	case 0x04:
-	{
-		ledOff_sure = veri;
-		break;
-	}
-	case 0x05://baudrate_hizi;
-	{
-		if(veri_lb==0)
-		{
-			huart3.Init.BaudRate = 115200;
-		}
-		else if (veri_lb==1)
-		{
-			huart3.Init.BaudRate = 230400;
-		}
-		else if (veri_lb==2)
-		{
-			huart3.Init.BaudRate = 57600;
-		}
-		else if (veri_lb==3)
-		{
-			huart3.Init.BaudRate = 38400;
-		}
-		else if (veri_lb==4)
-		{
-			huart3.Init.BaudRate = 9600;
-		}
-		else // default değeri olarak 115200 belirlendi
-		{
-			huart3.Init.BaudRate = 115200;
-		}
+			case 0x01:
+			{
+				uart_echo = start;
+				break;
+			}
+			case 0x02:
+			{
+				uart_echo = stop;
+				break;
+			}
+			case 0x03:
+			{
+				ledOn_sure = veri;
+				break;
+			}
+			case 0x04:
+			{
+				ledOff_sure = veri;
+				break;
+			}
+			case 0x05://baudrate_hizi;
+			{
+				if(veri_lb==0)
+				{
+					huart3.Init.BaudRate = 115200;
+				}
+				else if (veri_lb==1)
+				{
+					huart3.Init.BaudRate = 230400;
+				}
+				else if (veri_lb==2)
+				{
+					huart3.Init.BaudRate = 57600;
+				}
+				else if (veri_lb==3)
+				{
+					huart3.Init.BaudRate = 38400;
+				}
+				else if (veri_lb==4)
+				{
+					huart3.Init.BaudRate = 9600;
+				}
+				else // default değeri olarak 115200 belirlendi
+				{
+					huart3.Init.BaudRate = 115200;
+				}
 
-		HAL_UART_Init(&huart3);
-		break;
-	}
+				HAL_UART_Init(&huart3);
+				break;
+			}
 
-	default:
-	{
-		;
-	}
-	}
+			default:
+			{
+				;
+			}
+			}
 }
 
 /*
@@ -175,6 +175,8 @@ void uart_veri_ayristirma(void)
  *
  *			alıcı tarafta veri kaybı olmasın diye iki kez gönderiliyor.
  */
+
+
 void uart_veri_gonder(void)
 {
 	TX_veri[0]=0x36; // veri seti anahtar kodu

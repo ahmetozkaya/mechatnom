@@ -113,7 +113,7 @@ int main(void)
 		MX_USB_HOST_Process();
 
 		/* USER CODE BEGIN 3 */
-		led_kontrol(); // TIM3_IRQHandler(void) fonksiyonun içinde de çalıştırılabilir. başka fonksiyon olmadığı için main içinde çalıştırıldı
+		led_kontrol();
 
 	}
 	/* USER CODE END 3 */
