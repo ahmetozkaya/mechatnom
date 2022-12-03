@@ -11,6 +11,5 @@
 void led_kontrol (void);
 void uart_veri_oku(void);
 void uart_veri_gonder(void);
-void uart_veri_ayristirma(void);
 
 #endif /* INC_FUNCTIONS_H_ */

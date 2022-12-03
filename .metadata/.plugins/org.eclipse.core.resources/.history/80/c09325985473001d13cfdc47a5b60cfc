@@ -7,7 +7,7 @@
 
 #include "variables.h"
 #include "usart.h"
-#include "functions.h"
+
 void led_kontrol (void)
 {
 	if (uart_echo==stop)
@@ -79,87 +79,53 @@ void uart_veri_oku(void)
 				uart_baglanti_hatasi = 1;
 		}
 
-		uart_veri_ayristirma();
+		switch (komut){
+		case 0x01:
+		{
+			uart_echo = start;
+			break;
+		}
+		case 0x02:
+		{
+			uart_echo = stop;
+			break;
+		}
+		case 0x03:
+		{
+			ledOn_sure = veri;
+			break;
+		}
+		case 0x04:
+		{
+			ledOff_sure = veri;
+			break;
+		}
+		case 0x05://baudrate_hizi;
+		{
+			if(veri_lb==0)
+			{
+				huart3.Init.BaudRate = 115200;
+				HAL_UART_Init(&huart3);
+			}
+			else if (veri_lb==1)
+			{
+				huart3.Init.BaudRate = 9600;
+				HAL_UART_Init(&huart3);
+			}
+			break;
+		}
+
+		default:
+		{
+			;
+		}
+		}
 
 		if (uart_echo == start) // stop komutu gelmedigi surece her uart verisi alindiktan sonra veriyi echo yapacak
 		{
 			uart_veri_gonder();
 		}
 	}
-}
-
-/*
- * @brief 	Uart verilerini ayristirir
- * @param	komut verisinin durumuna göre ayarlamakarı yapar
- *
- * 			komut verisi 0x05 ise baudrate i veri_lb e göre ayarlar
- * 			veri_lb 0 ise 115200
- * 			veri_lb 1 ise 230400
- * 			veri_lb 2 ise 57600
- * 			veri_lb 3 ise 38400
- * 			veri_lb 4 ise 9600 diger degerlerde ise 115200 olarak secilmistir. fonksiyon güncellenebilir.
- *
- *
- */
-void uart_veri_ayristirma(void)
-{
-	switch (komut){
-			case 0x01:
-			{
-				uart_echo = start;
-				break;
-			}
-			case 0x02:
-			{
-				uart_echo = stop;
-				break;
-			}
-			case 0x03:
-			{
-				ledOn_sure = veri;
-				break;
-			}
-			case 0x04:
-			{
-				ledOff_sure = veri;
-				break;
-			}
-			case 0x05://baudrate_hizi;
-			{
-				if(veri_lb==0)
-				{
-					huart3.Init.BaudRate = 115200;
-				}
-				else if (veri_lb==1)
-				{
-					huart3.Init.BaudRate = 230400;
-				}
-				else if (veri_lb==2)
-				{
-					huart3.Init.BaudRate = 57600;
-				}
-				else if (veri_lb==3)
-				{
-					huart3.Init.BaudRate = 38400;
-				}
-				else if (veri_lb==4)
-				{
-					huart3.Init.BaudRate = 9600;
-				}
-				else // default değeri olarak 115200 belirlendi
-				{
-					huart3.Init.BaudRate = 115200;
-				}
-
-				HAL_UART_Init(&huart3);
-				break;
-			}
-
-			default:
-			{
-				;
-			}
-			}
 }
 
 /*

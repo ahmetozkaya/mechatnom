@@ -88,19 +88,7 @@ void uart_veri_oku(void)
 	}
 }
 
-/*
- * @brief 	Uart verilerini ayristirir
- * @param	komut verisinin durumuna göre ayarlamakarı yapar
- *
- * 			komut verisi 0x05 ise baudrate i veri_lb e göre ayarlar
- * 			veri_lb 0 ise 115200
- * 			veri_lb 1 ise 230400
- * 			veri_lb 2 ise 57600
- * 			veri_lb 3 ise 38400
- * 			veri_lb 4 ise 9600 diger degerlerde ise 115200 olarak secilmistir. fonksiyon güncellenebilir.
- *
- *
- */
+
 void uart_veri_ayristirma(void)
 {
 	switch (komut){

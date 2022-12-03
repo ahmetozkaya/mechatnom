@@ -20,6 +20,7 @@
 #define led_On_Off 		HAL_GPIO_WritePin( LD6_GPIO_Port,LD6_Pin,led_durum)
 uint8_t led_durum;
 
+uint32_t baudrate_hizi;
 uint8_t RX_veri[10];
 uint8_t TX_veri[10];
 
